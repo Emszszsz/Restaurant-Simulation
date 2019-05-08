@@ -12,10 +12,11 @@ class Headwaiter:
         >p group_attended_id - id of the group that the headwaiter is currently
            attending on
     """
-    def __init__(self, group_id):
-        self._group_attended_id = group_id
+    def __init__(self):
+        self._group_attended_id = 0
 
     def is_available(self, id):
+        self._group_attended_id = id
         if id != 0:
             return False
         else:

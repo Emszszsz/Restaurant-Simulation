@@ -2,7 +2,6 @@
 queues module
 """
 
-import numpy as np
 
 
 class Queue:
@@ -25,15 +24,14 @@ class Queue:
             self._queue_2.append(obj)
         elif getattr(obj, 'q_type') == 3:
             self._queue_3.append(obj)
-            print("Type of client doesn't match the type of queue")
 
     def dequeue(self, obj):
         if getattr(obj, 'q_type') == 1:
             self._queue_1.remove(obj)
-            print("Group {} leaves the queue".format(obj._id))
+            print("Group {} leaves the queue".format(obj.id))
         elif getattr(obj, 'q_type') == 2:
             self._queue_2.remove(obj)
-            print("Group {} leaves the queue".format(obj._id))
+            print("Group {} leaves the queue".format(obj.id))
         elif getattr(obj, 'q_type') == 3:
             self._queue_3.remove(obj)
         else:
