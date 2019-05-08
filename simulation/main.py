@@ -16,10 +16,6 @@ from table_end import TableEnd
 from waiter_drink import WaiterDrink
 from waiter_food import WaiterFood
 
-mean_b = 19
-std_b = 1.51
-l_d = 0.09
-l_f = 1
 
 queues = Queue()
 buffet = Buffet()

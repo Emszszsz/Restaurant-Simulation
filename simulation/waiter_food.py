@@ -7,6 +7,6 @@ class WaiterFood():
     def execute(waiter, obj):
         print('food')
         waiter.attend(obj.id)
-        end_dinner = np.random.exponential(1,2)
+        end_dinner = np.random.exponential(0.09,1)
         waiter.end_attend(obj.id)
 
