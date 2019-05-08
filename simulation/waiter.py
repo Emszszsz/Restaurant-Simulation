@@ -10,36 +10,25 @@ class Waiter:
     """
     Waiter is an object that brings the group drinks and food.
 
-    Attributes:
-    p - private
-        >p waiter_id - id of the waiter
-        >p group_attended_id - id of the group the waiter
-           is currently attending on
-
-    Methods:
-
-        > __init__(self, id) - initialises a Waiter object
-        > attend(self, g_id) - is activated when a group appears
-          at the table and is not attended on yet
-        > info(self) - displays information about the waiter
     """
 
-    def __init__(self, id):
-        self._waiter_id = id
+    def __init__(self):
+       self.waiters = {1:0, 2:0, 3:0}
 
     def attend(self, g_id):
-        self._group_attended_id = g_id
+       for i in range(1,3):
+           if self.waiters[i] == 0:
+               print('Waiter {} has begun to attend'.format(i))
+               print('On group number {}'.format(g_id))
+               self.waiters[i] = g_id
+               break
 
-    def info(self):
-        if self._group_attended_id != 0:
-            print("waiter number {} attends on group number {}".
-                  format(self._waiter_id, self._group_attended_id))
-        else:
-            print("waiter number {} is available".format(self._waiter_id))
+    def end_attend(self, id):
+       for i in range(1,3):
+           if self.waiters[i] == id:
+               print('Waiter {} has ended attending'.format(i))
+               self.waiters[i] = 0
+               
 
-"""
-Check if the class and it's methods work
-"""
-w = Waiter(1)
-w.attend(1)
-w.info()
+
+
