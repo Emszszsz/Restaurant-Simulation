@@ -32,7 +32,7 @@ class Group:
     """
 
     def __init__(self, id):
-        self._id = id
+        self.id = id
         probs = [0.2, 0.4, 0.1, 0.3]
         choices = [1, 2, 3, 4]
         self._place_to_eat = abs(np.random.normal(0.5, 0.1))

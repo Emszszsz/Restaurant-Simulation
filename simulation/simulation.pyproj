@@ -28,9 +28,15 @@
     <Compile Include="buffet.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="buffet_end.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="cashier.py" />
     <Compile Include="group.py" />
     <Compile Include="headwaiter.py" />
+    <Compile Include="headwaiter_end.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="queue.py" />
     <Compile Include="restaurant.py">
       <SubType>Code</SubType>

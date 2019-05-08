@@ -30,11 +30,3 @@ class Cashier:
         if self._group_attended_id != 0:
             print("Cashier number {} attends on group number {}".
                   format(self._id, self._group_attended_id))
-
-"""
-Creating and object to see if the class and
-it's methods work
-"""
-c = Cashier(1)
-c.attend(1)
-c.info()

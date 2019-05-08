@@ -26,16 +26,16 @@ class Buffet:
 
     def __init__(self):
         seats = 12
-        self._groups_eating = np.array([], dtype=object)
+        self.groups_eating = []
         self._all_seats = seats
         self._seats_free = seats
 
     def add(self, obj):
-        self._groups_eating = np.insert(self._groups_eating, 0, obj)
+        self.groups_eating.append(obj)
         self._seats_free = self._all_seats - obj._group_quant
 
     def info(self):
         print("Number of groups currently eating at the buffet: {}".
-              format(np.shape(self._groups_eating)[0]))
+              format(np.shape(self.groups_eating)[0]))
         print("Number of free seats at the buffet: {}".
               format(self._seats_free))

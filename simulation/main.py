@@ -7,16 +7,16 @@ from restaurant import Restaurant
 from appear import Appear
 from buffet_end import BuffetEnd
 from headwaiter_end import HeadwaiterEnd
+from buffet_begin import BuffetBegin
 
 mean_b = 19
 std_b = 1.51
 l_d = 0.09
 l_f = 1
 
+queues = Queue()
+buffet = Buffet()
 
 g = Group(1)
-a = Appear()
-b = BuffetEnd()
-
-a.execute(g)
-b.execute(g)
+Appear.execute(g, queues)
+BuffetBegin.execute(g, buffet)

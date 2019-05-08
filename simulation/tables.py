@@ -29,11 +29,3 @@ class Tables:
                   format(self._table_id, self._group_id))
         else:
             print("table number {} is empty".format(self._table_id))
-
-
-"""
-Creating an object to see if the class and
-it's methods work
-"""
-t = Tables(1, 2)
-t.info()

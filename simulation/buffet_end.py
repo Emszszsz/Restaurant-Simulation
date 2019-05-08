@@ -2,8 +2,10 @@ import numpy as np
 from buffet import Buffet
 from queue import Queue
 
-class BuffetEnd(Buffet, Queue):
+class BuffetEnd():
     """description of class"""
-    def execute(self, obj):
-        obj = Buffet()._groups_eating[-1]
-        Buffet()._groups_eating = np.delete(Buffet()._groups_eating, -1)
+    @staticmethod
+    def execute(obj, queue):
+        obj.q_type = 3
+        queue.enqueue(obj)
+        Buffet.groups_eating.remove(obj)
