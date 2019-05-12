@@ -1,5 +1,5 @@
 from waiter import Waiter
-class WaiterDrinkEnd():
+class WaiterDrinkEnd:
     """description of class"""
     @staticmethod
     def execute(waiter):

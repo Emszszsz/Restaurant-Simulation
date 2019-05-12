@@ -1,7 +1,8 @@
 from headwaiter import Headwaiter
 from queue import Queue
 
-class HeadwaiterBegin():
+
+class HeadwaiterBegin:
     """description of class"""
     @staticmethod
     def execute(headwaiter, obj, queue):

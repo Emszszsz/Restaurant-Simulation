@@ -1,6 +1,7 @@
 from headwaiter import Headwaiter
 
-class HeadwaiterEnd(Headwaiter):
+
+class HeadwaiterEnd:
     """Changes state of Headwaiter to available"""
     @staticmethod
     def execute(headwaiter):

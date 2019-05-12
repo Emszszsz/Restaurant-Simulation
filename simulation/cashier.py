@@ -1,8 +1,3 @@
-"""
-cashier module
-"""
-
-
 class Cashier:
     """
 

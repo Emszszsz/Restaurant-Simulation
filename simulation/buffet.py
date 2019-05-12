@@ -1,7 +1,3 @@
-"""
-    Buffet module
-"""
-
 import numpy as np
 
 

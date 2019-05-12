@@ -1,7 +1,8 @@
 import numpy as np
 from queue import Queue
 
-class Appear():
+
+class Appear:
     """class that manages the appearance of the clients in the system"""
     @staticmethod 
     def execute(obj, queue):

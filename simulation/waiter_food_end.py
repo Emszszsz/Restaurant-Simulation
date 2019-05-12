@@ -1,7 +1,7 @@
 import numpy as np
 from waiter import Waiter
 
-class WaiterFoodEnd():
+class WaiterFoodEnd:
     """description of class"""
     @staticmethod
     def execute(waiter):

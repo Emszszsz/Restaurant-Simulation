@@ -1,6 +1,8 @@
 from cashier import Cashier
 from group import Group
-class CashierEnd():
+
+
+class CashierEnd:
     """description of class"""
     @staticmethod
     def execute(cashier, obj):

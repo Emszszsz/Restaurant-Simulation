@@ -1,7 +1,7 @@
 from tables import Tables
 from queue import Queue
 
-class TableEnd():
+class TableEnd:
     """description of class"""
     @staticmethod
     def execute(obj, tables, queue):
