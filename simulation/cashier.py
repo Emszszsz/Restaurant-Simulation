@@ -2,8 +2,6 @@
 cashier module
 """
 
-import numpy as np
-
 
 class Cashier:
     """
@@ -21,12 +19,9 @@ class Cashier:
     """
 
     def __init__(self, id):
-        self._id = id
+        self._cashier_id = id
+        self._group_attended_id = 0
 
     def attend(self, g_id):
         self._group_attended_id = g_id
-
-    def info(self):
-        if self._group_attended_id != 0:
-            print("Cashier number {} attends on group number {}".
-                  format(self._id, self._group_attended_id))
+    

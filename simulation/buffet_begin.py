@@ -5,6 +5,7 @@ class BuffetBegin():
     @staticmethod
     def execute(obj, buffet):
         if buffet._seats_free >= obj._group_quant:
+            print("Group {} starts at buffet".format(obj.id))
             buffet.add(obj)
         else:
             print('No available seats for the group')

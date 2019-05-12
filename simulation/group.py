@@ -41,3 +41,5 @@ class Group:
             self.q_type = 1
         else:
             self.q_type = 2
+    def __del__(self):
+        print("Group {} deleted".format(self.id))

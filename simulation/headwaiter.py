@@ -15,13 +15,6 @@ class Headwaiter:
     def __init__(self):
         self._group_attended_id = 0
 
-    def is_available(self, id):
-        self._group_attended_id = id
-        if id != 0:
-            return False
-        else:
-            return True
-
     def info(self):
         if self._group_attended_id == 0:
             print("Headwaiter doesn't attend on any group")

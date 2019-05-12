@@ -4,5 +4,6 @@ class HeadwaiterEnd(Headwaiter):
     """Changes state of Headwaiter to available"""
     @staticmethod
     def execute(headwaiter):
-        headwaiter.is_available(0)
+        print("Headwaiter ends attending")
+        headwaiter._group_attended_id = 0
 
