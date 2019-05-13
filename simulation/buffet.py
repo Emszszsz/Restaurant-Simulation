@@ -35,3 +35,25 @@ class Buffet:
               format(np.shape(self.groups_eating)[0]))
         print("Number of free seats at the buffet: {}".
               format(self._seats_free))
+
+
+class BuffetBegin:
+    """description of class"""
+    @staticmethod
+    def execute(obj, buffet):
+        if buffet._seats_free >= obj._group_quant:
+            print("Group {} starts at buffet".format(obj.id))
+            buffet.add(obj)
+            obj.buffet_end_time = 2
+        else:
+            print('No available seats for the group')
+
+
+class BuffetEnd:
+    """description of class"""
+    @staticmethod
+    def execute(obj, queue, buffet, time):
+        if obj.buffet_end_time == time:
+            print('Group {} ends at the buffet'.format(obj.id))
+            queue.enqueue(obj)
+            buffet.groups_eating.remove(obj)

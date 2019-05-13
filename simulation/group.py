@@ -39,5 +39,3 @@ class Group:
             self.q_type = 2
         self.buffet_end_time = 0
         self.table_end_time = 0
-    def __del__(self):
-        print("Group {} deleted".format(self.id))

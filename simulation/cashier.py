@@ -1,3 +1,6 @@
+import numpy as np
+
+
 class Cashier:
     """
 
@@ -19,4 +22,21 @@ class Cashier:
 
     def attend(self, g_id):
         self._group_attended_id = g_id
-    
+
+
+class CashierBegin:
+    """description of class"""
+    @staticmethod
+    def execute(cashier, queue):
+        if queue._queue:
+            print('Cashier {} starts'.format(cashier._cashier_id))
+            queue.dequeue()
+            end_cashier = np.random.exponential(0.09, 1)
+
+
+class CashierEnd(CashierBegin):
+    """description of class"""
+    @staticmethod
+    def execute(cashier):
+        print('Cashier {} ends'.format(cashier._cashier_id))
+        cashier.attend(0)

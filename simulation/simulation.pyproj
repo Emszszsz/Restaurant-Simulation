@@ -35,10 +35,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="cashier.py" />
-    <Compile Include="cashier_begin.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="cashier_end.py">
+    <Compile Include="cashier_execute.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="group.py" />
@@ -54,7 +51,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main.py" />
-    <Compile Include="tables.py" />
+    <Compile Include="table.py" />
     <Compile Include="table_begin.py">
       <SubType>Code</SubType>
     </Compile>

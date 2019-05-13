@@ -14,10 +14,49 @@ class Headwaiter:
     """
     def __init__(self):
         self._group_attended_id = 0
+        self.end_attend_time = 0
 
-    def info(self):
-        if self._group_attended_id == 0:
-            print("Headwaiter doesn't attend on any group")
-        else:
-            print("Headwaiter attends on group {} ".
-                  format(self._group_attended_id))
+
+class HeadwaiterBegin:
+    """description of class"""
+    @staticmethod
+    def execute(headwaiter, queue, tables):
+        if queue._queue and headwaiter._group_attended_id == 0:
+            for i in queue._queue:
+                if i._group_quant == 4:
+                    print('Headwaiter begins to attend on group no. "{}"'
+                          .format(i.id))
+                    headwaiter._group_attended_id = i.id
+                    queue._queue.remove(i)
+                    headwaiter.end_attend_time = 3
+                    break
+                elif i._group_quant == 3:
+                    print('Headwaiter begins to attend on group no. "{}"'
+                          .format(i.id))
+                    headwaiter._group_attended_id = i.id
+                    queue._queue.remove(i)
+                    headwaiter.end_attend_time = 3
+                    break
+                elif i._group_quant == 2:
+                    print('Headwaiter begins to attend on group no. "{}"'
+                          .format(i.id))
+                    headwaiter._group_attended_id = i.id
+                    queue._queue.remove(i)
+                    headwaiter.end_attend_time = 3
+                    break
+                elif i._group_quant == 1:
+                    print('Headwaiter begins to attend on group no. "{}"'
+                          .format(i.id))
+                    headwaiter._group_attended_id = i.id
+                    queue._queue.remove(i)
+                    headwaiter.end_attend_time = 3
+                    break
+
+
+class HeadwaiterEnd:
+    """Changes state of Headwaiter to available"""
+    @staticmethod
+    def execute(headwaiter, time):
+        if headwaiter.end_attend_time == time:
+            print("Headwaiter ends attending")
+            headwaiter._group_attended_id = 0

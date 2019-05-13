@@ -10,8 +10,5 @@ class Queue:
     def enqueue(self, obj):
         self._queue.append(obj)
 
-    def dequeue(self, obj):
-        self._queue.remove(obj)
-        print("Group {} leaves the queue".format(obj.id))
-
-
+    def dequeue(self):
+        self._queue.pop(0)
