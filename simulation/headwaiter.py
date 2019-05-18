@@ -15,48 +15,57 @@ class Headwaiter:
     def __init__(self):
         self._group_attended_id = 0
         self.end_attend_time = 0
+        self.current_table = 0
 
 
 class HeadwaiterBegin:
     """description of class"""
     @staticmethod
-    def execute(headwaiter, queue, tables):
-        if queue._queue and headwaiter._group_attended_id == 0:
-            for i in queue._queue:
-                if i._group_quant == 4:
-                    print('Headwaiter begins to attend on group no. "{}"'
-                          .format(i.id))
-                    headwaiter._group_attended_id = i.id
-                    queue._queue.remove(i)
-                    headwaiter.end_attend_time = 3
-                    break
-                elif i._group_quant == 3:
-                    print('Headwaiter begins to attend on group no. "{}"'
-                          .format(i.id))
-                    headwaiter._group_attended_id = i.id
-                    queue._queue.remove(i)
-                    headwaiter.end_attend_time = 3
-                    break
-                elif i._group_quant == 2:
-                    print('Headwaiter begins to attend on group no. "{}"'
-                          .format(i.id))
-                    headwaiter._group_attended_id = i.id
-                    queue._queue.remove(i)
-                    headwaiter.end_attend_time = 3
-                    break
-                elif i._group_quant == 1:
-                    print('Headwaiter begins to attend on group no. "{}"'
-                          .format(i.id))
-                    headwaiter._group_attended_id = i.id
-                    queue._queue.remove(i)
-                    headwaiter.end_attend_time = 3
-                    break
+    def execute(headwaiter, queue, table1,
+                table2, table3, table4, quant, time):
+        max_group = max(quant)
+        index_max = quant.index(max_group)
+        if table4.group_eating_id == 0:
+            print('Headwaiter begins to attend on group no. "{}"'
+                  .format(queue._queue[index_max].id))
+            headwaiter._group_attended_id = queue._queue[index_max].id
+            table4.add(queue._queue.pop(index_max))
+            quant.remove(max_group)
+            headwaiter.end_attend_time = time + 30
+
+        elif table3.group_eating_id == 0 and max_group <= 3:
+            print('Headwaiter begins to attend on group no. "{}"'
+                  .format(queue._queue[index_max].id))
+            headwaiter._group_attended_id = queue._queue[index_max].id
+            table3.add(queue._queue.pop(index_max))
+            quant.remove(max_group)
+            headwaiter.end_attend_time = time + 30
+
+        elif table2.group_eating_id == 0 and max_group <= 2:
+            print('Headwaiter begins to attend on group no. "{}"'
+                  .format(queue._queue[index_max].id))
+            headwaiter._group_attended_id = queue._queue[index_max].id
+            table2.add(queue._queue.pop(index_max))
+            quant.remove(max_group)
+            headwaiter.end_attend_time = time + 30
+
+        elif table1.group_eating_id == 0 and max_group <= 2:
+            print('Headwaiter begins to attend on group no. "{}"'
+                  .format(queue._queue[index_max].id))
+            headwaiter._group_attended_id = queue._queue[index_max].id
+            table1.add(queue._queue.pop(index_max))
+            quant.remove(max_group)
+            headwaiter.end_attend_time = time + 30
 
 
 class HeadwaiterEnd:
     """Changes state of Headwaiter to available"""
     @staticmethod
-    def execute(headwaiter, time):
-        if headwaiter.end_attend_time == time:
-            print("Headwaiter ends attending")
-            headwaiter._group_attended_id = 0
+    def execute(headwaiter, tables):
+        print("Headwaiter ends attending on group no. {}".
+              format(headwaiter._group_attended_id))
+        for table in tables:
+            if table.group_eating_id == headwaiter._group_attended_id:
+                table._group_eating[0].attended = 1
+                break
+        headwaiter._group_attended_id = 0

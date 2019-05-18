@@ -25,6 +25,8 @@ class Buffet:
         self.groups_eating = []
         self._all_seats = seats
         self._seats_free = seats
+        self.mean_b = 3200
+        self.std_b = 10000
 
     def add(self, obj):
         self.groups_eating.append(obj)
@@ -40,20 +42,18 @@ class Buffet:
 class BuffetBegin:
     """description of class"""
     @staticmethod
-    def execute(obj, buffet):
-        if buffet._seats_free >= obj._group_quant:
-            print("Group {} starts at buffet".format(obj.id))
-            buffet.add(obj)
-            obj.buffet_end_time = 2
-        else:
-            print('No available seats for the group')
+    def execute(obj, buffet, restaurant):
+        print("Group {} starts at buffet".format(obj.id))
+        buffet.add(obj)
+        obj.attended = 1
+        obj.buffet_end_time = int(np.random.normal(buffet.mean_b, buffet.std_b))
 
 
 class BuffetEnd:
     """description of class"""
     @staticmethod
-    def execute(obj, queue, buffet, time):
-        if obj.buffet_end_time == time:
-            print('Group {} ends at the buffet'.format(obj.id))
-            queue.enqueue(obj)
-            buffet.groups_eating.remove(obj)
+    def execute(obj, queue, buffet):
+        print('Group {} ends at the buffet'.format(obj.id))
+        obj.q_type = 3
+        queue.enqueue(obj)
+        buffet.groups_eating.remove(obj)

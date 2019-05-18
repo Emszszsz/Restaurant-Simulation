@@ -28,49 +28,16 @@
     <Compile Include="buffet.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="buffet_begin.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="buffet_end.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="cashier.py" />
-    <Compile Include="cashier_execute.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="group.py" />
     <Compile Include="headwaiter.py" />
-    <Compile Include="headwaiter_begin.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="headwaiter_end.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="queue.py" />
     <Compile Include="restaurant.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main.py" />
     <Compile Include="table.py" />
-    <Compile Include="table_begin.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="table_end.py">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="waiter.py" />
-    <Compile Include="waiter_drink_begin.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="waiter_drink_end.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="waiter_food_begin.py">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="waiter_food_end.py">
-      <SubType>Code</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env1\">

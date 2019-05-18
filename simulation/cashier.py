@@ -19,6 +19,8 @@ class Cashier:
     def __init__(self, id):
         self._cashier_id = id
         self._group_attended_id = 0
+        self.end_attend_time = 0
+        self.lambda_p = 200
 
     def attend(self, g_id):
         self._group_attended_id = g_id
@@ -27,16 +29,17 @@ class Cashier:
 class CashierBegin:
     """description of class"""
     @staticmethod
-    def execute(cashier, queue):
+    def execute(cashier, queue, time):
         if queue._queue:
             print('Cashier {} starts'.format(cashier._cashier_id))
+            cashier._group_attended_id = queue._queue[len(queue._queue)-1].id
             queue.dequeue()
-            end_cashier = np.random.exponential(0.09, 1)
+            cashier.end_attend_time = time + int(np.random.exponential(cashier.lambda_p))
 
 
-class CashierEnd(CashierBegin):
+class CashierEnd():
     """description of class"""
     @staticmethod
     def execute(cashier):
         print('Cashier {} ends'.format(cashier._cashier_id))
-        cashier.attend(0)
+        cashier._group_attended_id = 0

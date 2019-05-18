@@ -29,7 +29,8 @@ class Group:
 
     def __init__(self, id):
         self.id = id
-        probs = [0.2, 0.4, 0.1, 0.3]
+        self.lambda_f = 1900
+        probs = [0.11, 0.33, 0.33, 0.23]
         choices = [1, 2, 3, 4]
         self._place_to_eat = abs(np.random.normal(0.5, 0.1))
         self._group_quant = np.random.choice(choices, p=probs)
@@ -38,4 +39,5 @@ class Group:
         else:
             self.q_type = 2
         self.buffet_end_time = 0
-        self.table_end_time = 0
+        self.dinner_end_time = 0
+        self.attended = 0
