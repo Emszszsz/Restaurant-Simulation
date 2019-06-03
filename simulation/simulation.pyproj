@@ -36,6 +36,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="main.py" />
+    <Compile Include="statistic.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="stats.py" />
     <Compile Include="table.py" />
     <Compile Include="waiter.py" />
   </ItemGroup>

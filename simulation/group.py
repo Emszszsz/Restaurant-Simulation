@@ -1,4 +1,5 @@
 import numpy as np
+import random as random
 
 
 class Group:
@@ -32,12 +33,14 @@ class Group:
         self.lambda_f = 1900
         probs = [0.11, 0.33, 0.33, 0.23]
         choices = [1, 2, 3, 4]
-        self._place_to_eat = abs(np.random.normal(0.5, 0.1))
+        self._place_to_eat = random.random()
         self._group_quant = np.random.choice(choices, p=probs)
-        if self._place_to_eat >= 0.5:
+        if self._place_to_eat < 0.5:
             self.q_type = 1
         else:
             self.q_type = 2
         self.buffet_end_time = 0
         self.dinner_end_time = 0
         self.attended = 0
+        self.appearance_time = 0
+        self.end_attend_headwaiter = 0

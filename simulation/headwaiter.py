@@ -16,56 +16,40 @@ class Headwaiter:
         self._group_attended_id = 0
         self.end_attend_time = 0
         self.current_table = 0
-
-
-class HeadwaiterBegin:
-    """description of class"""
-    @staticmethod
-    def execute(headwaiter, queue, table1,
-                table2, table3, table4, quant, time):
-        max_group = max(quant)
-        index_max = quant.index(max_group)
-        if table4.group_eating_id == 0:
-            print('Headwaiter begins to attend on group no. "{}"'
-                  .format(queue._queue[index_max].id))
-            headwaiter._group_attended_id = queue._queue[index_max].id
-            table4.add(queue._queue.pop(index_max))
-            quant.remove(max_group)
-            headwaiter.end_attend_time = time + 30
-
-        elif table3.group_eating_id == 0 and max_group <= 3:
-            print('Headwaiter begins to attend on group no. "{}"'
-                  .format(queue._queue[index_max].id))
-            headwaiter._group_attended_id = queue._queue[index_max].id
-            table3.add(queue._queue.pop(index_max))
-            quant.remove(max_group)
-            headwaiter.end_attend_time = time + 30
-
-        elif table2.group_eating_id == 0 and max_group <= 2:
-            print('Headwaiter begins to attend on group no. "{}"'
-                  .format(queue._queue[index_max].id))
-            headwaiter._group_attended_id = queue._queue[index_max].id
-            table2.add(queue._queue.pop(index_max))
-            quant.remove(max_group)
-            headwaiter.end_attend_time = time + 30
-
-        elif table1.group_eating_id == 0 and max_group <= 2:
-            print('Headwaiter begins to attend on group no. "{}"'
-                  .format(queue._queue[index_max].id))
-            headwaiter._group_attended_id = queue._queue[index_max].id
-            table1.add(queue._queue.pop(index_max))
-            quant.remove(max_group)
-            headwaiter.end_attend_time = time + 30
-
-
-class HeadwaiterEnd:
-    """Changes state of Headwaiter to available"""
-    @staticmethod
-    def execute(headwaiter, tables):
-        print("Headwaiter ends attending on group no. {}".
-              format(headwaiter._group_attended_id))
+    
+    def begin(self, queue, tables, quant, list_id, time, stat):
+        quant.sort(reverse=True)
+        list_id.sort(reverse=True)
         for table in tables:
-            if table.group_eating_id == headwaiter._group_attended_id:
-                table._group_eating[0].attended = 1
+            if table.group_eating_id == 0 and self.current_table == 0:
+                self.current_table = table._table_id
                 break
-        headwaiter._group_attended_id = 0
+            if table._table_id == self.current_table:
+                for i in quant:
+                    if table._table_quant >= i:
+                        table.group_eating_id = list_id[quant.index(i)]
+                        list_id.pop(quant.index(i))
+                        quant.remove(i)
+                        self._group_attended_id = table.group_eating_id
+                        
+                        for group in queue._queue:
+                            if group.id == table.group_eating_id:
+                                print('Headwaiter attends on group no. {}'.
+                                      format(group.id))
+                                stat.wait_time_headwaiter.append(time - group.appearance_time)
+                                self.end_attend_time = time + 20
+                                queue._queue.remove(group)
+                                group.end_attend_headwaiter = self.end_attend_time
+                                table._group_eating = group
+                                break
+
+    def end(self, tables):
+       for table in tables:
+           if table._group_eating.id == self._group_attended_id:
+               table._group_eating.attended = 1
+       print("Headwaiter ends attending on group no. {}".
+             format(self._group_attended_id))
+       self._group_attended_id = 0
+       self.current_table = 0
+       self.end_attend_time = 0
+

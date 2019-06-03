@@ -4,6 +4,7 @@ waiter module
 """
 import numpy as np
 
+
 class Waiter:
     """
     Waiter is an object that brings the group drinks and food.
@@ -18,50 +19,30 @@ class Waiter:
         self.lambda_n = 300
         self.lambda_j = 1700
 
-    def attend_drink(self, g_id):
-        print('Waiter {} starts attending (drink)'
-              .format(self._waiter_id))
-        self._group_attended_id = g_id
+    def drink_begin(self, time, table, stat):
+        if table._group_eating.attended == 1:
+            print('Waiter {} starts attending on group no. {} (drink)'.
+                  format(self._waiter_id, table._group_eating.id))
+            self._group_attended_id = table._group_eating.id
+            self.end_attend_drink = time + int(np.random.exponential(self.lambda_n))
+            table._group_eating.attended = 2
+            stat.wait_time_waiter.append(time - table._group_eating.end_attend_headwaiter)
 
-    def attend_food(self, g_id):
-        print('Waiter {} starts attending (food)'
-              .format(self._waiter_id))
-        self._group_attended_id = g_id
+    def drink_end(self):
+        if self._group_attended_id:
+            print('Waiter {} ends attending (drink)'.format(self._waiter_id))
+            self._group_attended_id = 0
 
-    def end_attend(self):
-        self._group_attended_id = 0
+    def food_begin(self, time, table):
+        if table._group_eating.attended == 2:
+            print('Waiter {} starts attending on group no. {} (food)'.
+                  format(self._waiter_id, table._group_eating.id))
+            self._group_attended_id = table._group_eating.id
+            self.end_attend_food = time + int(np.random.exponential(self.lambda_j))
+            table._group_eating.attended = 3
+            table._group_eating.dinner_end_time = self.end_attend_food + int(np.random.exponential(table._group_eating.lambda_f))
 
-
-class WaiterDrinkBegin:
-    """description of class"""
-    @staticmethod
-    def execute(waiter, obj, time):
-        waiter.attend_drink(obj)
-        waiter.end_attend_drink = time + int(np.random.exponential(1/waiter.lambda_n))
-        obj.attended = 2
-
-
-class WaiterDrinkEnd:
-    """description of class"""
-    @staticmethod
-    def execute(waiter):
-        print('Waiter {} ends attending (drink)'.format(waiter._waiter_id))
-        waiter.end_attend()
-
-
-class WaiterFoodBegin:
-    """description of class"""
-    @staticmethod
-    def execute(waiter, obj, time):
-        waiter.attend_food(obj.id)
-        waiter.end_attend_food = time + int(np.random.exponential(1/waiter.lambda_j))
-        obj.attended = 3
-        obj.dinner_end_time = waiter.end_attend_food + int(np.random.exponential(1/obj.lambda_f))
-
-
-class WaiterFoodEnd:
-    """description of class"""
-    @staticmethod
-    def execute(waiter):
-        print('Waiter {} ends attending (food)'.format(waiter._waiter_id))
-        waiter.end_attend()
+    def food_end(self):
+        if self._group_attended_id:
+            print('Waiter {} ends attending (food)'.format(self._waiter_id))
+            self._group_attended_id = 0

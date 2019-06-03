@@ -26,34 +26,22 @@ class Buffet:
         self._all_seats = seats
         self._seats_free = seats
         self.mean_b = 3200
-        self.std_b = 10000
+        self.std_b = 100
 
     def add(self, obj):
         self.groups_eating.append(obj)
         self._seats_free = self._all_seats - obj._group_quant
 
-    def info(self):
-        print("Number of groups currently eating at the buffet: {}".
-              format(np.shape(self.groups_eating)[0]))
-        print("Number of free seats at the buffet: {}".
-              format(self._seats_free))
-
-
-class BuffetBegin:
-    """description of class"""
-    @staticmethod
-    def execute(obj, buffet, restaurant):
+    def begin(self, obj, restaurant):
         print("Group {} starts at buffet".format(obj.id))
-        buffet.add(obj)
+        restaurant.queue_buffet._queue.remove(obj)
+        self.add(obj)
         obj.attended = 1
-        obj.buffet_end_time = int(np.random.normal(buffet.mean_b, buffet.std_b))
+        obj.buffet_end_time = restaurant.simulation_time + abs(
+            int(np.random.normal(self.mean_b, self.std_b)))
 
-
-class BuffetEnd:
-    """description of class"""
-    @staticmethod
-    def execute(obj, queue, buffet):
+    def end(self, obj, queue):
         print('Group {} ends at the buffet'.format(obj.id))
-        obj.q_type = 3
-        queue.enqueue(obj)
-        buffet.groups_eating.remove(obj)
+        queue._queue.append(obj)
+        self.groups_eating.remove(obj)
+        self._seats_free += obj._group_quant
