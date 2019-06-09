@@ -30,6 +30,5 @@ class Restaurant:
         self.tables_4 = [Table(i+1, 4) for i in range(14, 18)]
         self.all_tables = self.tables_2 + self.tables_3 + self.tables_4
         self.cashiers = [Cashier(i+1) for i in range(4)]
-        self.group_quant = []
-        self.group_id = []
+        self.groups = []
         self.next_appearance_time = 0

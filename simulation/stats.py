@@ -10,6 +10,9 @@ class Stats:
         self.queue_cashiers = []
         self.groups_appearance_time = []
         self.headwaiter_start = []
+        self.number_of_all = []
+        self.number_of_groups = 0
+        self.time = []
 
 
     def histogram_queue_tables(self):
@@ -45,3 +48,9 @@ class Stats:
         x = int(statistics.mean(self.queue_cashiers))
         print('Mean for the number of groups waiting for cashier is: {}'.format(x))
         return x
+    
+    def phase(self):
+        plt.plot(self.time, self.number_of_all)
+        plt.ylabel('Number of groups')
+        plt.xlabel('Time')
+        plt.show()

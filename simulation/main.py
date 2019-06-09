@@ -12,24 +12,27 @@ from cashier import *
 R = Restaurant()
 Stat = Stats()
 i = 1
-
 x = input('Ending 1(time) or 2(number of groups)? 1/2')
 
 if x == '1':
-    while R.simulation_time < 36000:
+    while R.simulation_time < 144000:
             if R.simulation_time == R.next_appearance_time:
                 g = Group(i)
                 g.appearance_time = R.simulation_time
+                Stat.number_of_groups += 1
+                Stat.number_of_all.append(Stat.number_of_groups)
+                Stat.time.append(R.simulation_time)
                 i += 1
                 if g.q_type == 1:
                     Appear.execute(g, R.queue_buffet, R)
+                    
                 if g.q_type == 2:
                     Appear.execute(g, R.queue_headwaiter, R)
                     Stat.queue_tables.append(len(R.queue_headwaiter._queue))
                     Stat.groups_appearance_time.append(g.appearance_time)
 
             for group in R.buffet.groups_eating:
-                if group.buffet_end_time == R.simulation_time:
+                if group.buffet_end_time == R.simulation_time != 0:
                     R.buffet.end(group, R.queue_cashiers)
 
             if  R.simulation_time == R.headwaiter.end_attend_time != 0:
@@ -43,18 +46,25 @@ if x == '1':
                 if waiter.end_attend_food == R.simulation_time != 0:
                     waiter.food_end()
 
+            for table in R.all_tables:
+                if table._group_eating.dinner_end_time == R.simulation_time != 0:
+                    table.end(R.queue_cashiers)
+
             for cashier in R.cashiers:
                 if cashier.end_attend_time == R.simulation_time != 0:
                     cashier.end()
+                    Stat.number_of_groups -= 1
+                    Stat.number_of_all.append(Stat.number_of_groups)
+                    Stat.time.append(R.simulation_time)
 
             for group in R.queue_buffet._queue:
                 if R.buffet._seats_free >= group._group_quant:
                     R.buffet.begin(group, R)
 
             if R.queue_headwaiter._queue and R.headwaiter._group_attended_id == 0:
+                R.headwaiter.sort(R.groups)
                 R.headwaiter.begin(
-                    R.queue_headwaiter, R.all_tables, R.group_quant,
-                    R.group_id, R.simulation_time, Stat)
+                    R.queue_headwaiter, R.all_tables, R.groups, R.simulation_time, Stat)
 
             for waiter in R.waiters:
                 if waiter._group_attended_id == 0:
@@ -88,7 +98,6 @@ elif x == '2':
                     Appear.execute(g, R.queue_headwaiter, R)
                     Stat.queue_tables.append(len(R.queue_headwaiter._queue))
                     Stat.groups_appearance_time.append(g.appearance_time)
-
             for group in R.buffet.groups_eating:
                 if group.buffet_end_time == R.simulation_time:
                     R.buffet.end(group, R.queue_cashiers)
@@ -113,9 +122,9 @@ elif x == '2':
                     R.buffet.begin(group, R)
 
             if R.queue_headwaiter._queue and R.headwaiter._group_attended_id == 0:
+                R.headwaiter.sort(R.groups)
                 R.headwaiter.begin(
-                    R.queue_headwaiter, R.all_tables, R.group_quant,
-                    R.group_id, R.simulation_time, Stat)
+                    R.queue_headwaiter, R.all_tables, R.groups, R.simulation_time, Stat)
 
             for waiter in R.waiters:
                 if waiter._group_attended_id == 0:
@@ -145,3 +154,4 @@ Stat.mean_table()
 Stat.mean_headwaiter()
 Stat.mean_waiter()
 Stat.mean_cashier()
+Stat.phase()

@@ -24,3 +24,10 @@ class Table:
     def remove(self):
         self.group_eating_id = 0
         self._group_eating = 0
+
+    def end(self, queue):
+        queue._queue.append(self._group_eating)
+        self._group_eating = Group(0)
+        self.group_eating_id = 0
+        
+

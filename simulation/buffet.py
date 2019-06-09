@@ -21,7 +21,7 @@ class Buffet:
     """
 
     def __init__(self):
-        seats = 12
+        seats = 14
         self.groups_eating = []
         self._all_seats = seats
         self._seats_free = seats
